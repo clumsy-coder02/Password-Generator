@@ -1,0 +1,19 @@
+Main goal: make a script that makes a strong password for users, based on input
+
+Input details:
+1.Type of password (Numeric passwords, alphabetical password, alphanumeric password)
+2.Length of password (size of the password)
+
+
+Making password
+1.Numeric passwords
+-the output should be the length of the password provided
+
+2.Alphabetical password
+-mix small letters a-z and capital letters A-Z
+-combine both as the output password
+-the output should be the length of the password provided
+
+3.Alphanumeric password
+-make numeric password and alphabetical
+-both should be halves of the password length provided
