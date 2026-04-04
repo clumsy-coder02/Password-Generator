@@ -17,3 +17,8 @@ Making password
 3.Alphanumeric password
 -make numeric password and alphabetical
 -both should be halves of the password length provided
+
+4.Complex password
+-make alphanumeric password
+-make special character password
+-both should be halves of the password length
