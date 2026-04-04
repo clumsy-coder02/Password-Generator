@@ -8,7 +8,7 @@ print() # spacing
 
 # get details
 print("Select the Type of Password")
-print("\n1.Numeric password\n2.Alphabetical password\n3.Alphanumeric password\n4.I don't need a password")
+print("\n1.Numeric password\n2.Alphabetical password\n3.Alphanumeric password\n4.Complex password\n5.I don't need a password")
 print() # spacing
 password_type = input("Select by typing a number: ")
 
@@ -24,6 +24,9 @@ def select_options():
         # alphanumeric function
         alphanumeric_password()
     elif password_type == "4":
+        # call the complex password function
+        complex_password()
+    elif password_type == "5":
         # call the exit function
         exit_program()
     else:
@@ -40,8 +43,8 @@ def numeric_password():
     
     # Generate random digits for the specified length
     numeric_index = 1
-    while numeric_index < password_length:
-        password += str(random.randint(0, 100)) # random value as a string
+    while numeric_index <= password_length:
+        password += str(random.randint(0, 9)) # random value as a string
         numeric_index+=1  # prevent infinite loop  
 
     print(f"\nYour password: {password}")
@@ -54,7 +57,7 @@ def alphabetical_password():
 
     # Generate random letters
     letters_index = 1
-    while letters_index < password_length:
+    while letters_index <= password_length:
         letter_sequence = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         password += random.choice(letter_sequence)
         letters_index+=1 # prevent infinite loop
@@ -68,31 +71,85 @@ def alphanumeric_password():
     password_length = int(input("Enter the length of password: "))
     numeric_password = "" # number values
     alphabetic_password = "" # alphabetical password
+
+    random_password = "" # template of final password
     password = "" # final password output as a string
 
-    # generate random numbers, half of the password length
+    # generate random numbers, same number as the password length
     numeric_index = 1
-    while numeric_index < password_length // 2:
-        numeric_password += str(random.randint(0,100)) # random value as a string
+    while numeric_index <= password_length:
+        numeric_password += str(random.randint(0,9)) # random value as a string
         numeric_index+=1 # prevent infinite loop
     
-    # generate random letters, half of the password length
+    # generate random letters, same number as password length
     letters_index = 1
-    while letters_index < password_length // 2:
+    while letters_index <= password_length:
         letter_sequence = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         alphabetic_password += random.choice(letter_sequence)
         letters_index+=1 # prevent infinite loop
     
-    # combine the two values & convert into a list for shuffle to work
-    combined_values = list(numeric_password + alphabetic_password)
+    # combine the two values, resulting in twice the password length
+    combined_values = numeric_password + alphabetic_password
+
+    # select randomly, same number of password length
+    random_select_index = 1
+    while random_select_index <= password_length:
+        # sequence is the combined values
+        random_password += random.choice(combined_values)
+        random_select_index+=1 # prevent infinite loop
+    
+    # convert into a list for mixing to work
+    random_password_list = list(random_password)
     # mix the values up 
-    random.shuffle(combined_values)
+    random.shuffle(random_password_list)
     # convert to a string
-    password += "".join(combined_values)
+    password += "".join(random_password_list)
 
     print(f"Your password: {password}")
 
+# complex password
+def complex_password():
+    # quarter numbers, quarter special characters(full half of password length), half letters
+    password_length = int(input("Enter the length of password: "))
 
+    numeric_password = "" # number values
+    letters_password = "" # letter values, small & capital
+
+    random_password = "" # template for final password
+    password = "" # main output 
+
+    # generate random numbers, same number of the password length
+    numeric_index = 1
+    while numeric_index <= password_length:
+        numeric_password += str(random.randint(0,9))
+        numeric_index+=1 # prevent infinite loop
+    
+    # generate random letters and special characters 1/2 of the password
+    letters_index = 1
+    while letters_index <= password_length:
+        letters_sequence = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#%^&*"
+        letters_password += str(random.choice(letters_sequence))
+        letters_index+=1 # prevent infinite loop
+
+    # combine all passwords, resulting in twice the password length
+    combined_values = numeric_password + letters_password
+
+    # select randomly, same number as password length
+    random_select_index = 1
+    while random_select_index <= password_length:
+        # the sequence is the combined values
+        random_password += random.choice(combined_values)
+        random_select_index+=1 # prevent infinite loop
+    
+    # convert the password template into a list
+    random_password_list = list(random_password)
+    # mix them up
+    random.shuffle(random_password_list)
+    # convert them back to a string and add to the main output
+    password += "".join(random_password_list)
+
+    # display final output
+    print(f"Your password: {password}")
 
 # exit program
 def exit_program():

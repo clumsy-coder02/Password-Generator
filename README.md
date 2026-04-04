@@ -28,4 +28,3 @@ A small Python CLI project that generates strong passwords by user input.
 
 - Run the script with 'python3 app.py or python app.py'
 - Follow prompts to generate a password
-
